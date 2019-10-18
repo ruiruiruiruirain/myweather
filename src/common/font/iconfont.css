@@ -1,0 +1,33 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1571395501789'); /* IE9 */
+  src: url('iconfont.eot?t=1571395501789#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAO8AAsAAAAACBgAAANvAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDMgqDNIJ5ATYCJAMUCwwABCAFhG0HTBsJB8gekiRCQAIFC/IAACARPC3fzdvdu1xadYmq1XfXmopsFSxGgLBYjMFohOka/f9XZ35ZDlnHoHYkIhXQIDsOOYYDwKlEG/JOE9HUTn3ZCtPBdGnC1/o/l9Om+Px2luNayyZ21AswmkBZtsbwQEskQW8Yu4mgIS4m0GHMNGh3w7Z9EFSAVoF4Ng0ZghmHohjhRqgrBhaIL+DTpD7hLfCZfz/+wWoEQVJlAB2Pb9drsOpnJDWGWydaHaUYYE6ngzGMjHmgEB8rDc9wFJiHdXjVRZtAh0aSpir3PzWSGptokXAOJOqAf3iEJCtEDSCyC2wqwcLPCEYIfv5HSPwcQcj8HGN9mGUq0IFOfAK+KsRxYfpA3sE6La/AimJWeygu9Z8pOKycAW9ztrDh7M282lOnIvLp/EMNbjp0JQmnoXRMGr5920+gK8i971+/loEU5MePg0SQDHLo2td1aW++T8ZEaL1J0gduo8NVszakieknBm4Wi+duSBn9t0p8F28TJkrMnAmv4pW3jyhwo7Dm4eM6uz+zQVlix37PX17w8rrr4/szX0416vPwPFO+TWFT0AVg0tn+7eBcZW69wFrZMNk+/Vjmkt3MqX/Z+aytztGNzftBpQMte/DXgo0bd7FdJKHgG/uWU5vDsOzOzZrhMP8UbsGtKftyahBDNTnAyfum7Getbth/3hJtohagdSr/xRYA+VL4Dlq3cqvEkLG3f4EQ7N0PtZ/IXPY/SESAHx9eLDlapwoMDzYSnZl/jtkxpfhsoKyKm4wZrrGynFJIXlYH/pdlwK9pRMOdIwmN4QSSNqOQNcaxhTgPlU7rUGtsQIc5G4d3GuTAooSAWV0ShD73IenxHbI+77CF+BMqI/5ArS8wdLiM3Ak7TYYprXW47HGNKnXUVK2EjtSeJKL3cKMqJjtpNicx7rimm86eMSsf3sgT3Jmii1ttzPE8neqOFacbpOV4LGbRpGNFuOrNCHtecsnMmXrVnWaoVhwkOxyczMNpKEUdyqSyJOg0s0cqfH4PzlAlRuY0oHr0DOdwmaVTs80wqwN2oyDRCXUrx7iqGebweHSUzmGJozZIOi4GAxYqWV0vglN5ZggP8CUtMVNJp3cVzFheFH/HRdABXKkKAWEkIh/yQ9u1bIXlhIFlTfNrPMY9HtKqlJipPoIcAAA=') format('woff2'),
+  url('iconfont.woff?t=1571395501789') format('woff'),
+  url('iconfont.ttf?t=1571395501789') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1571395501789#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-daohang:before {
+  content: "\e66a";
+}
+
+.icon-add:before {
+  content: "\e6f0";
+}
+
+.icon-delete:before {
+  content: "\e6f6";
+}
+
+.icon-dublicate:before {
+  content: "\e6f8";
+}
+

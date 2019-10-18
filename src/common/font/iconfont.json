@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2265605",
+      "name": "导航",
+      "font_class": "daohang",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "11215182",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e6f0",
+      "unicode_decimal": 59120
+    },
+    {
+      "icon_id": "11215218",
+      "name": "delete",
+      "font_class": "delete",
+      "unicode": "e6f6",
+      "unicode_decimal": 59126
+    },
+    {
+      "icon_id": "11215222",
+      "name": "dublicate",
+      "font_class": "dublicate",
+      "unicode": "e6f8",
+      "unicode_decimal": 59128
+    }
+  ]
+}
