@@ -1,21 +1,19 @@
 <template>
   <div class="fore-day">
     <span class="day">{{day}}</span>
-    <span class="sub-weather">{{subWeather}}</span>
+    <span class="sub-weather">{{txt}}</span>
     <span class="temp">{{minTemp}}~{{maxTemp}}</span>
   </div>
 </template>
 <script>
 export default {
-  props:['foreDetail'],
-  data(){
-    return {
-      maxTemp:20,
-      minTemp:10,
-      day:'10/1',
-      subWeather:'晴'
+  props:['foreDay','txt','minTemp','maxTemp'],
+  computed: {
+    day(){
+      let temp=this.foreDay.split('-');
+      return `${temp[1]}/${temp[2]}`;
     }
-  }
+  },
 }
 </script>
 <style lang="less" scoped>

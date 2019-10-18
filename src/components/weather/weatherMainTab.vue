@@ -14,8 +14,6 @@ export default {
   components:{
     weatherDetail,
   },
-  methods:{
-  }
 }
 </script>
 <style lang="less" scoped>

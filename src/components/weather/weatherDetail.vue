@@ -3,7 +3,7 @@
     <div class="header-bar" v-show="isActive" :style="{opacity:barOpacity}">
       <span @click.stop="del" class="iconfont icon-delete"></span>
       <span @click.stop="add" class="iconfont icon-add"></span>
-      <span @click.stop="$root.active=-1" class="iconfont icon-dublicate"></span>
+      <span @click.stop="toList" class="iconfont icon-dublicate"></span>
     </div>
     <div class="header">
       <span class="main-city">{{cityName[0]}}</span>
@@ -12,19 +12,17 @@
       <img :src="iconSrc" alt="" v-show="isActive">
       <span class="cur-temp">{{curTemp}}</span>
     </div>
-    <transition name="details" v-show="isActive">
-      <div class="details">
+    <transition name="details">
+      <div class="details"  v-show="isActive">
         <div class="forecast">
-          <foreDay class="fore-days"></foreDay>
-          <foreDay class="fore-days"></foreDay>
-          <foreDay class="fore-days"></foreDay>
+          <foreDay class="fore-days"
+          v-for="t of foreDays" :key="t.date" :foreDay="t.date" :txt="t.cond_txt_d" :minTemp="t.tmp_min" :maxTemp="t.tmp_max"
+          ></foreDay>
         </div>
         <div class="day-detail">
-          <dayItem class="day-items"></dayItem>
-          <dayItem class="day-items"></dayItem>
-          <dayItem class="day-items"></dayItem>
-          <dayItem class="day-items"></dayItem>
-          <dayItem class="day-items"></dayItem>
+          <dayItem class="day-items"
+          v-for="t of lifeStyle" :key="t.type" :comType="t.type" :brf="t.brf" :txt="t.txt"
+          ></dayItem>
         </div>
       </div>
     </transition>
@@ -47,18 +45,32 @@ export default {
   },
   data(){
     return{
-      subWeather:'多云转晴',
+      subWeather:'',
       scrollTop:0,
       curTemp:16,
       isNight:false,
+      webIcon:100,
+      foreDays:[],
+      lifeStyle:[],
     }
+  },
+  created(){
+    let tc=setTimeout(()=>{
+      this.initDay.call(this).then(()=>{
+        clearTimeout(tc);
+      },(e)=>{
+        clearTimeout(tc);
+        this.$root.conn=false;
+        console.log(e);
+      })
+    },10*Math.random())
   },
   computed: {
     cityName(){
       return this.city.split(',');
     },
     iconSrc(){
-      return require('../../common/weatherIcon/'+'501.png');
+      return require('../../common/weatherIcon/'+this.webIcon+'.png');
     },
     barOpacity(){
       return this.scrollTop<30?(30-this.scrollTop)/30:0;
@@ -87,6 +99,7 @@ export default {
   methods:{
     del(){
       let root=this.$root;
+      if(root.cityList.length==1)return;
       if(root.active===root.cityList.length-1){
         root.active--;
         root.cityList.splice(root.active+1,1);
@@ -95,6 +108,10 @@ export default {
         root.cityList.splice(root.active,1);
       }
     },
+    toList(){
+      this.scrollTop=0;
+      this.$root.active=-1;
+    }
   }
 }
 </script>
@@ -118,18 +135,22 @@ export default {
       font-size: .9rem;
       line-height: 1rem;
       margin-left: .14rem;
-      flex: 0 1 50%;
+      flex: 1 1 50%;
       .word-ellip();
     }
     .sub-weather{
       font-size: .7rem;
       .word-ellip();
+      flex:1 1 25%;
+      text-align:center;
     }
     .cur-temp{
       font-size: 1.3rem;
       line-height: 1rem;
-      margin-right: .14rem;
       .word-ellip();
+      flex:1 1 25%;
+      text-align:center;
+
     }
   }
 }
@@ -165,7 +186,7 @@ export default {
     }
     .main-city{
       padding-top:2rem;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
     .parent-city{
       font-size: .6rem;
