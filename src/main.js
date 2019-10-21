@@ -14,10 +14,12 @@ fastClick.attach(document.body);
 import {getWeather} from '@/common/js/utils'
 import {initDay} from '@/common/js/utils'
 import {searchCity} from '@/common/js/utils'
+import {initDayDetail} from '@/common/js/utils'
 
 Vue.prototype.getWeather=getWeather;
 Vue.prototype.initDay=initDay;
 Vue.prototype.searchCity=searchCity;
+Vue.prototype.initDayDetail=initDayDetail;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -38,9 +40,6 @@ new Vue({
         this.cityList.unshift(`${res.location},${res.parent_city}`);
         if(localStorage.getItem('cityList')){
           this.cityList.push(...JSON.parse(localStorage.getItem('cityList')));
-        }
-        else{
-          localStorage.setItem('cityList',JSON.stringify([]));
         }
       },(e)=>{this.conn=false;console.error('LocHandle error:'+e);});
     }

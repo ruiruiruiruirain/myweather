@@ -20,6 +20,9 @@ export const initDay=async function(){
   this.subWeather=e.now.cond_txt;
   this.curTemp=e.now.tmp;
   this.webIcon=e.now.cond_code;
+}
+
+export const initDayDetail=async function(){
   let fore=await this.getWeather('forecast',this.city);
   this.foreDays=fore.daily_forecast;
   let life=await this.getWeather('lifestyle',this.city);

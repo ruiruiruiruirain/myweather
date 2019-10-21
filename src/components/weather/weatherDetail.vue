@@ -1,5 +1,5 @@
 <template>
-  <div class="weather-detail" ref="wd" :class="{night:isNight}">
+  <div class="weather-detail" ref="wd">
     <div class="header-bar" v-show="isActive" :style="{opacity:barOpacity}">
       <span @click.stop="del" class="iconfont icon-delete" v-show="$root.active!==0&&isActive"></span>
       <span @click.stop="$emit('add')" class="iconfont icon-add"></span>
@@ -50,10 +50,10 @@ export default {
       subWeather:'-',
       scrollTop:0,
       curTemp:16,
-      isNight:false,
       webIcon:100,
       foreDays:[],
       lifeStyle:[],
+      count:-1,
     }
   },
   created(){
@@ -63,7 +63,7 @@ export default {
       },(e)=>{
         clearTimeout(tc);
         this.$root.conn=false;
-        console.error('initDay'+this.city+':'+e);
+        console.error(`initDay error ${this.city} : ${e}`)
       })
     },100*Math.random())
   },
@@ -80,12 +80,21 @@ export default {
   },
   watch:{
     isActive:function(){
+      this.count++;
       if(this.isActive){
         this.$refs.wd.addEventListener('scroll',this.lis);
       }
       else{
         this.$refs.wd.removeEventListener('scroll',this.lis);
         this.scrollTop=0;
+      }
+    },
+    count:function(){
+      if(!this.count){
+        this.initDayDetail().catch((e)=>{
+          this.$root.conn=false;
+          console.error(`initDayDetail error ${this.city} : ${e}`)
+        })
       }
     }
   },
@@ -227,5 +236,4 @@ export default {
     }
   }
 }
-
 </style>

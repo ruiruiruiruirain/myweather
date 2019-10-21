@@ -23,7 +23,6 @@ export default {
   methods:{
     ext(){
       window.close();
-      console.log('aa');
     }
   }
 }
