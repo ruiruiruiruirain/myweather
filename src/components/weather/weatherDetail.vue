@@ -1,8 +1,8 @@
 <template>
   <div class="weather-detail" ref="wd" :class="{night:isNight}">
     <div class="header-bar" v-show="isActive" :style="{opacity:barOpacity}">
-      <span @click.stop="del" class="iconfont icon-delete"></span>
-      <span @click.stop="add" class="iconfont icon-add"></span>
+      <span @click.stop="del" class="iconfont icon-delete" v-show="$root.active!==0&&isActive"></span>
+      <span @click.stop="$emit('add')" class="iconfont icon-add"></span>
       <span @click.stop="toList" class="iconfont icon-dublicate"></span>
     </div>
     <div class="header">
@@ -12,24 +12,26 @@
       <img :src="iconSrc" alt="" v-show="isActive">
       <span class="cur-temp">{{curTemp}}</span>
     </div>
-    <transition name="details">
-      <div class="details"  v-show="isActive">
-        <div class="forecast">
-          <foreDay class="fore-days"
-          v-for="t of foreDays" :key="t.date" :foreDay="t.date" :txt="t.cond_txt_d" :minTemp="t.tmp_min" :maxTemp="t.tmp_max"
-          ></foreDay>
-        </div>
-        <div class="day-detail">
-          <dayItem class="day-items"
-          v-for="t of lifeStyle" :key="t.type" :comType="t.type" :brf="t.brf" :txt="t.txt"
-          ></dayItem>
-        </div>
+    <div class="details"  v-show="isActive">
+      <div class="forecast">
+        <foreDay class="fore-days"
+        v-for="t of foreDays" :key="t.date" :foreDay="t.date" :txt="t.cond_txt_d" :minTemp="t.tmp_min" :maxTemp="t.tmp_max"
+        ></foreDay>
       </div>
-    </transition>
+      <div class="day-detail">
+        <div v-if="!lifeStyle">
+          <span>暂不支持</span>
+          <span>{{city.split(',')[0]}}地区</span>
+          <span>生活详情的查询</span>
+        </div>
+        <dayItem v-else class="day-items"
+        v-for="t of lifeStyle" :key="t.type" :comType="t.type" :brf="t.brf" :txt="t.txt"
+        ></dayItem>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import shade from '../common/shade'
 import foreDay from './foreDay'
 import dayItem from './dayItem'
 export default {
@@ -45,7 +47,7 @@ export default {
   },
   data(){
     return{
-      subWeather:'',
+      subWeather:'-',
       scrollTop:0,
       curTemp:16,
       isNight:false,
@@ -56,14 +58,14 @@ export default {
   },
   created(){
     let tc=setTimeout(()=>{
-      this.initDay.call(this).then(()=>{
+      this.initDay().then(()=>{
         clearTimeout(tc);
       },(e)=>{
         clearTimeout(tc);
         this.$root.conn=false;
-        console.log(e);
+        console.error('initDay'+this.city+':'+e);
       })
-    },10*Math.random())
+    },100*Math.random())
   },
   computed: {
     cityName(){
@@ -74,25 +76,20 @@ export default {
     },
     barOpacity(){
       return this.scrollTop<30?(30-this.scrollTop)/30:0;
-    }
+    },
   },
   watch:{
     isActive:function(){
-      let wd=this.$refs.wd;
-      let lis=()=>{
-        this.scrollTop=wd.scrollTop;
-      }
       if(this.isActive){
-        wd.addEventListener('scroll',lis);
+        this.$refs.wd.addEventListener('scroll',this.lis);
       }
       else{
-        wd.removeEventListener('scroll',lis);
+        this.$refs.wd.removeEventListener('scroll',this.lis);
         this.scrollTop=0;
       }
     }
   },
   components:{
-    shade,
     foreDay,
     dayItem
   },
@@ -100,17 +97,16 @@ export default {
     del(){
       let root=this.$root;
       if(root.cityList.length==1)return;
-      if(root.active===root.cityList.length-1){
-        root.active--;
-        root.cityList.splice(root.active+1,1);
-      }
-      else{
-        root.cityList.splice(root.active,1);
-      }
+      root.cityList.splice(root.active,1);
+      root.active=-1;
+      localStorage.setItem('cityList',JSON.stringify(this.$root.cityList.slice(1)));
     },
     toList(){
       this.scrollTop=0;
       this.$root.active=-1;
+    },
+    lis(){
+      this.scrollTop=this.$refs.wd.scrollTop;
     }
   }
 }
@@ -163,18 +159,11 @@ export default {
     top: 0;
     left: 0;
     right: 0;
+    padding: 0 .2rem;
     background: rgba(248, 234, 234, 0.274);
     .flex-between();
     .icon-delete,.icon-add,.icon-dublicate{
       font-size: .8rem;
-    }
-    span{
-      &:nth-child(1){
-        margin-left: .2rem;
-      }
-      &:nth-child(3){
-        margin-right: .2rem;
-      }
     }
   }
   .header{
@@ -222,6 +211,13 @@ export default {
       padding-bottom: .2rem;
     }
     .day-detail{
+      span{
+        display:block;
+        text-align:center;
+        font-size:.8rem;
+        margin:.2rem 0;
+        opacity:.6;
+      }
       .day-items{
         padding-top: .2rem;
         height: 2.3rem;

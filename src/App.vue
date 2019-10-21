@@ -1,16 +1,13 @@
 <template>
   <div id="app">
     <transition name="shade">
-      <shade v-if="showErr" @click.stop>
+      <shade v-if="!$root.conn" @click.stop>
         <div class="los-tab">
           <span class="tips">暂时与服务器断开连接，请退出重新尝试</span>
-          <span class="close" @click="cusShowErr=false">+</span>
+          <span class="close" @click="ext">+</span>
         </div>
       </shade>
     </transition>
-    <div class="los-title" v-if="!$root.conn">
-      <span>与服务器断开连接</span><span>离线中</span>
-    </div>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -20,17 +17,13 @@
 import shade from './components/common/shade'
 export default {
   name:'App',
-  data(){
-    return {
-      cusShowErr:true,
-    }
-  },
   components:{
     shade,
   },
-  computed:{
-    showErr(){
-      return this.cusShowErr&&!this.$root.conn;
+  methods:{
+    ext(){
+      window.close();
+      console.log('aa');
     }
   }
 }
@@ -71,13 +64,6 @@ export default {
       left: .2rem;
       top:-.6rem;
     }
-  }
-  .los-title{
-    .flex-between();
-    font-size: .6rem;
-    line-height: .7rem;
-    background: @warn;
-    color:#000;
   }
 }
 </style>

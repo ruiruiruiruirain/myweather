@@ -1,19 +1,50 @@
 <template>
-  <div id="weatherMainTab">
+  <div id="weatherMainTab" ref="weatherMainTab">
     <div class="list-title" :class="{deactive:$root.active!==-1}">
       速览
     </div>
-    <weatherDetail class="city" :class="{slad:$root.active==-1,active:$root.active===i,deactive:$root.active!==i&&$root.active!==-1}" v-for="(t,i) of $root.cityList" :key="t"  :city="t"  @click.native="$root.active=i" :isActive="$root.active==i"
+    <weatherDetail class="city" :class="{slad:$root.active==-1,active:$root.active===i,deactive:$root.active!==i&&$root.active!==-1}" v-for="(t,i) of $root.cityList" :key="t"  :city="t"  @click.native="$root.active=i" :isActive="$root.active==i" @add="addCity"
     >
     </weatherDetail>
+    <transition>
+      <searchMainTab v-show="search" :focus.sync="focus" :search.sync="search"></searchMainTab>
+    </transition>
   </div>
 </template>
 <script>
 import weatherDetail from './weatherDetail'
+import searchMainTab from '../search/searchMainTab'
 export default {
   components:{
     weatherDetail,
+    searchMainTab
   },
+  data(){
+    return {
+      focus:false,
+      search:false,
+    }
+  },
+  methods:{
+    addCity(){
+      this.$root.active=-1;
+      this.search=true;
+    },
+    stopScroll(e){
+      e.preventDefault();
+    }
+  },
+  watch:{
+    focus(){
+      if(this.focus){
+        this.$refs.weatherMainTab.addEventListener('touchmove',this.stopScroll);
+      }
+      else{
+        this.$refs.weatherMainTab.removeEventListener('touchmove',this.stopScroll)
+        ;
+      }
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
