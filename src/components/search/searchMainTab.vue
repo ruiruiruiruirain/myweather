@@ -29,9 +29,11 @@ export default {
     },
     toDetail(t){
       this.$root.cityList.push(`${t.basic.location},${t.basic.parent_city}`);
-      this.$root.active=this.$root.cityList.length-1;
       localStorage.setItem('cityList',JSON.stringify(this.$root.cityList.slice(1)));
       this.cancelSearch();
+      this.$nextTick(()=>{
+        this.$root.active=this.$root.cityList.length-1;
+      });
     }
   },
   watch:{
