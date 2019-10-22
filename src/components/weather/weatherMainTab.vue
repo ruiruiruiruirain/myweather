@@ -7,7 +7,7 @@
     >
     </weatherDetail>
     <transition>
-      <searchMainTab v-show="search" :focus.sync="focus" :search.sync="search"></searchMainTab>
+      <searchMainTab v-show="search" :search.sync="search"></searchMainTab>
     </transition>
   </div>
 </template>
@@ -21,7 +21,6 @@ export default {
   },
   data(){
     return {
-      focus:false,
       search:false,
     }
   },
@@ -35,13 +34,12 @@ export default {
     }
   },
   watch:{
-    focus(){
-      if(this.focus){
+    search(){
+      if(this.search){
         this.$refs.weatherMainTab.addEventListener('touchmove',this.stopScroll);
       }
       else{
-        this.$refs.weatherMainTab.removeEventListener('touchmove',this.stopScroll)
-        ;
+        this.$refs.weatherMainTab.removeEventListener('touchmove',this.stopScroll);
       }
     }
   }

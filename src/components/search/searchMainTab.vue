@@ -1,7 +1,7 @@
 <template>
   <div id="search-tab">
     <div class="input-area">
-      <input type="text" ref="search" @click="$refs.search.focus()" @focus="$emit('update:focus',true)" @blur="$emit('update:focus',false)" placeholder="输入城市名称 中文或拼音" v-model.trim="city">&nbsp;
+      <input type="text" ref="search" @click="$refs.search.focus()" placeholder="输入城市名称 中文或拼音" v-model.trim="city">&nbsp;
       <span @click="cancelSearch">取消</span>
     </div>
     <transition mode="out-in">
@@ -101,7 +101,9 @@ export default {
   transition:all .4s;
 }
 #search-tab{
-  .full-fixed();
+  position:fixed;
+  width:100%;
+  height:100%;
   overflow:auto;
   text-align: center;
   padding-top:.6rem;
