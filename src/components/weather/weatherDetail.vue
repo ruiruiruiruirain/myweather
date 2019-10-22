@@ -123,115 +123,108 @@ export default {
 <style lang="less" scoped>
 @import url('../../common/css/base.less');
 .weather-detail{
-  // background: @green-blue;
-  &.night{
-    background: @night-back;
-  }
   &.slad{
     background:@blur-white;
-  }
-}
-.slad{
-  .header{
-    .flex-between();
-    align-items: flex-end;
-    height: 2rem;
-    .main-city{
-      font-size: .9rem;
-      line-height: 1rem;
-      margin-left: .14rem;
-      flex: 1 1 50%;
-      .word-ellip();
-    }
-    .sub-weather{
-      font-size: .7rem;
-      .word-ellip();
-      flex:1 1 25%;
-      text-align:center;
-    }
-    .cur-temp{
-      font-size: 1.3rem;
-      line-height: 1rem;
-      .word-ellip();
-      flex:1 1 25%;
-      text-align:center;
-
-    }
-  }
-}
-.active{
-  overflow:auto;
-  .header-bar{
-    line-height: 1.2rem;
-    height: 1.2rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0 .2rem;
-    background: rgba(248, 234, 234, 0.274);
-    .flex-between();
-    .icon-delete,.icon-add,.icon-dublicate{
-      font-size: .8rem;
-    }
-  }
-  .header{
-    text-align: center;
-    transition:all .24s;
-    height: 11rem;
-    .main-city,.parent-city,.sub-weather,.cur-temp{
-      display: block;
-    }
-    .main-city{
-      padding-top:2rem;
-      font-size: 1.4rem;
-    }
-    .parent-city{
-      font-size: .6rem;
-      padding-top: .4rem;
-    }
-    .sub-weather{
-      padding-top: .3rem;
-      font-size: .85rem;
-    }
-    img{
-      height:2rem;
-      opacity: .8;
-      vertical-align: bottom;
-    }
-    .cur-temp{
-      margin-top:-.4rem;
-      font-size: 2.6rem;
-      font-weight: 300;
-    }
-  }
-  .details{
-    .forecast{
-      height: 3rem;
-      background: @blur-white;
-      .flex-between;
+    .header{
+      .flex-between();
       align-items: flex-end;
-      width: 100%;
-      .fore-days{
-        height: 3rem;
-        flex:1 0 1.5rem;
+      height: 2rem;
+      .main-city{
+        font-size: .9rem;
+        line-height: 1rem;
+        margin-left: .14rem;
+        flex: 1 1 50%;
         .word-ellip();
       }
-      padding-bottom: .2rem;
-    }
-    .day-detail{
-      span{
-        display:block;
+      .sub-weather{
+        font-size: .7rem;
+        .word-ellip();
+        flex:1 1 25%;
         text-align:center;
-        font-size:.8rem;
-        margin:.2rem 0;
-        opacity:.6;
       }
-      .day-items{
-        padding-top: .2rem;
-        height: 2.3rem;
-        background:@blur-white;
-        box-sizing: border-box;
+      .cur-temp{
+        font-size: 1.3rem;
+        line-height: 1rem;
+        .word-ellip();
+        flex:1 1 25%;
+        text-align:center;
+      }
+    }
+  }
+  &.active{
+    overflow:auto;
+    .header-bar{
+      line-height: 1.2rem;
+      height: 1.2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 0 .2rem;
+      background: rgba(248, 234, 234, 0.274);
+      .flex-between();
+      .icon-delete,.icon-add,.icon-dublicate{
+        font-size: .8rem;
+      }
+    }
+    .header{
+      text-align: center;
+      transition:all .24s;
+      height: 11rem;
+      .main-city,.parent-city,.sub-weather,.cur-temp{
+        display: block;
+      }
+      .main-city{
+        padding-top:2rem;
+        font-size: 1.4rem;
+      }
+      .parent-city{
+        font-size: .6rem;
+        padding-top: .4rem;
+      }
+      .sub-weather{
+        padding-top: .3rem;
+        font-size: .85rem;
+      }
+      img{
+        height:2rem;
+        opacity: .8;
+        vertical-align: bottom;
+      }
+      .cur-temp{
+        margin-top:-.4rem;
+        font-size: 2.6rem;
+        font-weight: 300;
+      }
+    }
+    .details{
+      .forecast{
+        height: 3rem;
+        background: @blur-white;
+        .flex-between();
+        align-items: flex-end;
+        width: 100%;
+        padding-bottom: .2rem;
+        .fore-days{
+          height: 3rem;
+          flex:1 0 1.5rem;
+          .word-ellip();
+        }
+      }
+      .day-detail{
+        span{
+          display:block;
+          text-align:center;
+          font-size:.8rem;
+          margin:.2rem 0;
+          opacity:.6;
+        }
+        .day-items{
+          padding-top: .2rem;
+          height: 2.3rem;
+          background:@blur-white;
+          box-sizing: border-box;
+        }
       }
     }
   }
